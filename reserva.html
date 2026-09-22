@@ -8,6 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Hoja de estilos personalizada con tus colores -->
     <link rel="stylesheet" href="styles.css">
+
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+
 </head>
 <body>
 
@@ -38,74 +47,147 @@
     <main class="container my-5">
         
         <section class="mb-4 text-center">
-            <h2>Nuestra Oferta Local</h2>
-            <p class="lead">Disfruta de una estadía confortable y experiencias culinarias inolvidables.</p>
+            <h2>Formulario de Contacto</h2>
         </section>
 
-        <div class="card">
-            <div class="card-body">
-
-                
-                <form>
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                    <label for="validationServer01">First name</label>
-                    <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                    <label for="validationServer02">Last name</label>
-                    <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-3 mb-3">
-                        <label for="validationServer03">City</label>
-                        <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid city.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer04">State</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid state.
-                    </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer05">Zip</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid zip.
-                    </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                    <label class="form-check-label" for="invalidCheck3">
-                        Agree to terms and conditions
-                    </label>
-                    <div class="invalid-feedback">
-                        You must agree before submitting.
-                    </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary" type="submit">Submit form</button>
-            </form>
-            </div>
-        </div>
+        <div id="root"></div>
 
     </main>
+
+
+  <script type="text/babel">
+        
+        function Revisar_formulario() {
+            const [nombre, setNombre] = React.useState('');
+            const [apellido, setApellido] = React.useState('');
+
+            //nombre
+            let claseNombre = "form-control"; 
+            if (nombre.length === 0) {
+                claseNombre = "form-control";
+            } else if (nombre.length < 3) {
+                claseNombre = "form-control is-invalid"; 
+            } else {
+                claseNombre = "form-control is-valid";
+            }
+
+            //apellido
+            let claseApellido = "form-control";
+            if (apellido.length === 0) {
+                claseApellido = "form-control";
+                
+            } else if (apellido.length < 3){
+                claseApellido = "form-control is-invalid";
+            } else{
+                claseApellido = "form-control is-valid";
+
+            }
+
+
+            return (
+                <div className="card">
+                    <div className="card-body">
+                        <form>
+                            <div className="row mb-3">
+                                
+                                {/* APARTADO NOMBRE */}
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="validationServer01">Nombre</label>
+                                    <input 
+                                        type="text" 
+                                        className={claseNombre} /* Aquí conectamos la validación */
+                                        id="validationServer01" 
+                                        placeholder="Escribe tu nombre" 
+                                        value={nombre} /* Conectamos el valor */
+                                        onChange={(e) => setNombre(e.target.value)} /* Conectamos el evento (con mayúscula) */
+                                        required 
+                                    />                    
+                                    
+                                    {/* Mensajes de feedback */}
+                                    {nombre.length > 0 && nombre.length < 3 && (
+                                        <div className="invalid-feedback">El nombre debe tener al menos 3 letras.</div>
+                                    )}
+                                    {nombre.length >= 3 && (
+                                        <div className="valid-feedback">¡Se ve bien!</div>
+                                    )}
+                                </div>
+                                
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="validationServer02">Apellidos</label>
+                                    <input type="text" 
+                                        className={claseApellido} 
+                                        id="validationServer02" 
+                                        placeholder="Apellido Paterno y Materno"  
+                                        value = {apellido}
+                                        onChange = {(e) => setApellido(e.target.value)}
+                                        required />
+                                    {/* Mensajes de feedback */}
+                                    {apellido.length > 0 && apellido.length < 3 && (
+                                        <div className="invalid-feedback">El apellido debe tener al menos 3 letras.</div>
+                                    )}
+                                    {apellido.length >= 3 && (
+                                        <div className="valid-feedback">¡Se ve bien!</div>
+                                    )}
+                                </div>
+                            </div>
+ 
+
+                            <div className="row mb-3">
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="validationServer05">Correo electronico</label>
+                                    <input type="text" className="form-control " id="validationServer05" placeholder="correo@direccion.com" required />
+
+                                </div>
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="validationServer03">Ciudad</label>
+                                    <input type="text" className="form-control" id="validationServer03" placeholder="City" required />
+
+                                </div>
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="validationServer04">Comuna</label>
+                                    <input type="text" className="form-control" id="validationServer04" placeholder="Ingrese su comuna" required />
+                                    <div className="invalid-feedback">
+                                        Please provide a valid state.
+                                    </div>
+                                </div>
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="validationServer05">Codigo Postal</label>
+                                    <input type="text" className="form-control" id="validationServer05" placeholder="Codigo postal" required />
+
+                                </div>
+                                <div className="col-md-4 mb-3">
+                                    <label htmlFor="validationServer05">Numero de telefono</label>
+                                    <input type="text" className="form-control" id="validationServer05" placeholder="+56 999999999" required />
+
+                                </div>
+                            </div>
+
+                            <div className="form-group mb-3">
+                                <div className="form-check">
+                                    <input className="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required />
+                                    <label className="form-check-label" htmlFor="invalidCheck3">
+                                        Acepto los terminos y condiciones
+                                    </label>
+                                    <div className="invalid-feedback">
+                                        Debes aceptar los terminos y condiciones para continuar.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button className="btn btn-primary" type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+
+        // ¡ESTO ERA LO QUE FALTABA PARA QUE APARECIERA!
+        const contenedor = document.getElementById('root');
+        const root = ReactDOM.createRoot(contenedor);
+        root.render(<Revisar_formulario />);
+
+    </script>
+
 
     <!-- Footer -->
     <footer>
