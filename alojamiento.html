@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destino Cordillera - Alojamiento y Gastronomía</title>
+    <!-- Bootstrap 5 CSS para componentes responsive -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Hoja de estilos personalizada con tus colores -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header y Navegación -->
+    <header>
+        <div class="logo">
+            <h2>Destino Cordillera</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="panoramas.html">Panoramas</a></li>
+                <li><a href="alojamiento.html" class="active">Alojamiento y Gastronomía</a></li>
+                <li><a href="reserva.html">Reserva y Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner Superior -->
+    <section class="hero" style="padding: 3rem 1rem;">
+        <div class="hero-content">
+            <h1>Alojamiento y Gastronomía</h1>
+            <p>Descubre los mejores lugares para descansar y disfrutar los sabores cordilleranos.</p>
+        </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <main class="container my-5">
+        
+        <section class="mb-4 text-center">
+            <h2>Nuestra Oferta Local</h2>
+            <p class="lead">Disfruta de una estadía confortable y experiencias culinarias inolvidables.</p>
+        </section>
+
+        <!-- Grilla de 6 Tarjetas (Cards) con Bootstrap -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+            <!-- TARJETA 1 (Completada) -->
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/cabañacordillera.jpg" class="card-img-top" alt="Cabañas del Valle" style="height: 400px;; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Alojamiento</span>
+                        <h5 class="card-title text-success">Cabañas Zacarias flores del Campo</h5>
+                        <p class="card-text">Acogedoras cabañas equipadas con tinajas de agua caliente y vista panorámica a la cordillera.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <a href="reserva.html" class="btn btn-sm text-white" style="background-color: #1B5E20;">Reservar Estadía</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETA 2 (Completada) -->
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/zacarias.jpg" class="card-img-top" alt="Restaurante El Paisano" style="height: 400px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">Gastronomía</span>
+                        <h5 class="card-title text-success">Restaurante El Paisano</h5>
+                        <p class="card-text">Especialidad en carnes a la parrilla, pastel de choclo y empanadas tradicionales en horno de barro.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                      <p class="card-text">Horario: Lunes a Sábado 12:00 - 22:00 hrs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETA 3 (Completada) -->
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/cabañastinaja.jpg" alt="Lodge Refugio Cordillera" style="height: 400px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Alojamiento</span>
+                        <h5 class="card-title text-success">Tinajas y Cabañas Cordillera</h5>
+                        <p class="card-text">Cabañas acogedoras con tinajas de agua caliente y vista panorámica a la cordilleras</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <a href="reserva.html" class="btn btn-sm text-white" style="background-color: #1B5E20;">Reservar Estadía</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- TARJETA 4  -->
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/pizza.jpg" class="card-img-top" alt="Nombre Opción 4" style="height: 400px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">Gastronomía</span>
+                        <h5 class="card-title text-success">Pizzería "A las Puertas del Cerro"</h5>
+                        <p class="card-text">Deliciosas pizzas regionales en un entorno natural y acogedor junto con una vista inolvidable.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <p class="card-text">Horario: Martes a Sábado 12:00 - 21:00 hrs</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETA 5  -->
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/Hostal.jpg" class="card-img-top" alt="Nombre Opción 5" style="height: 400px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">Alojamiento</span>
+                        <h5 class="card-title text-success">Hostal "Eclipse"</h5>
+                        <p class="card-text">Disfruta de una estadía en uno de los hostales más acogedores y hermosos de la región.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <a href="reserva.html" class="btn btn-sm text-white" style="background-color: #1B5E20;">Reservar estadía</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETA 6 (Para que edites tú) -->
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="img/entremontañas.jpg" class="card-img-top" alt="Nombre Opción 6" style="height: 400px; object-fit: cover;">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">Gastronomía</span>
+                        <h5 class="card-title text-success">Viñeta y Restaurante "Entre Montañas"</h5>
+                        <p class="card-text">Disfruta de una deliciosa comida junto con tenedor libre y una sala de nuestros vinos seleccionados.</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 pb-3">
+                        <p class="card-text">Horario: Martes a Sábado 13:00 - 23:00 hrs</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p> 2026 Destino Cordillera - Proyecto de Turismo Local</p>
+    </footer>
+
+    <!-- Bootstrap 5 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
