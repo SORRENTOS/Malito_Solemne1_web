@@ -60,6 +60,8 @@
         function Revisar_formulario() {
             const [nombre, setNombre] = React.useState('');
             const [apellido, setApellido] = React.useState('');
+            const [correo,setCorreo] = React.useState('');
+            const [formulario,setFormulario] = React.useState(false)
 
             //nombre
             let claseNombre = "form-control"; 
@@ -73,6 +75,7 @@
 
             //apellido
             let claseApellido = "form-control";
+            
             if (apellido.length === 0) {
                 claseApellido = "form-control";
                 
@@ -82,12 +85,63 @@
                 claseApellido = "form-control is-valid";
 
             }
+            //correo
+            const [sinEditarAun,setsinEditarAun] = React.useState(true)
+            let claseCorreo = "form-control";
+            if (correo.includes("@") && sinEditarAun === false) {
+                claseCorreo = "form-control is-valid";
+            }else if (sinEditarAun === false){
+                claseCorreo = "form-control is-invalid";
+
+                
+            }
 
 
+            //checkbox 
+            const [marcado,setMarcado] = React.useState(false);
+            let claseCheckBox =  "form-control";
+            if (marcado === true && presionado ===true) {
+                claseCheckBox = "form-control is-valid";
+            } else if(marcado ===false && presionado == true){
+                claseCheckBox = "form-control is-invalid";
+            }
+
+
+            //BOTON
+            const [presionado,setPresionado] = React.useState(false);
+            
+            if (formulario === true){
+
+
+                return(
+                    <div className="card text-center p-5">
+                        <div className="card-body">
+                    {/* Cambia la ruta por la de tu imagen real */}
+                    <img 
+                        src="img/foto_formulario.jpg" 
+                        alt="Reserva exitosa" 
+                        style={{ maxWidth: '500px', margin: '0 auto', marginBottom: '20px', borderRadius: '30px' }} 
+                    />
+                    <h3 className="text-success">¡Todo listo!</h3>
+                    <p className="lead">Nos pondremos en contacto con usted a la brevedad para confirmar su reserva.</p>
+                    
+                    {/* Botón opcional por si quieren enviar otra reserva */}
+                    <button className="btn btn-outline-primary mt-3"
+                            onClick = {(e) => window.location.href = 'index.html'}
+                    >
+                        Volver al Incio
+                    </button>
+                </div>
+            </div>
+
+                );
+            }
+            
             return (
                 <div className="card">
                     <div className="card-body">
-                        <form>
+                        <form
+                        onSubmit = {(e) => setFormulario(true)}>
                             <div className="row mb-3">
                                 
                                 {/* APARTADO NOMBRE */}
@@ -119,7 +173,11 @@
                                         id="validationServer02" 
                                         placeholder="Apellido Paterno y Materno"  
                                         value = {apellido}
-                                        onChange = {(e) => setApellido(e.target.value)}
+                                        onChange = {(e) => {
+                                            setApellido(e.target.value);
+                                        }
+
+                                        }
                                         required />
                                     {/* Mensajes de feedback */}
                                     {apellido.length > 0 && apellido.length < 3 && (
@@ -131,16 +189,38 @@
                                 </div>
                             </div>
  
-
+                            {/* correo */}
                             <div className="row mb-3">
                                 <div className="col-md-4 mb-3">
                                     <label htmlFor="validationServer05">Correo electronico</label>
-                                    <input type="text" className="form-control " id="validationServer05" placeholder="correo@direccion.com" required />
+                                    <input type="text" 
+                                    className={claseCorreo} 
+                                    id="validationServer05" 
+                                    placeholder="correo@direccion.com" 
+                                    value = {correo}
+                                    onChange = {(e) => {
+                                        setCorreo(e.target.value);
+                                        setsinEditarAun(false);
 
+
+
+
+                                    }}
+                                    required />
+                                {/* Mensajes de feedback */}
+                                    {correo.includes("@") == false &&correo !== "" &&(
+                                        <div className="invalid-feedback">Ingrese una direccion de correo valida</div>
+                                    )}
+                                    {correo.includes("@") == true && (
+                                        <div className="valid-feedback">Direccion valida!</div>
+                                    )}
+                                    {correo === "" && (
+                                        <div></div>
+                                    )}                                    
                                 </div>
                                 <div className="col-md-4 mb-3">
                                     <label htmlFor="validationServer03">Ciudad</label>
-                                    <input type="text" className="form-control" id="validationServer03" placeholder="City" required />
+                                    <input type="text" className="form-control" id="validationServer03" placeholder="Santiago" required />
 
                                 </div>
                                 <div className="col-md-4 mb-3">
@@ -164,17 +244,32 @@
 
                             <div className="form-group mb-3">
                                 <div className="form-check">
-                                    <input className="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required />
+                                    <input 
+                                    className={marcado ? "form-check-input is-valid" : "form-check-input is-invalid"}                                    
+                                    type="checkbox" 
+                                    value="" 
+                                    id="invalidCheck3"
+                                    checked = {marcado}
+                                    onChange = {(e) => setMarcado(e.target.checked)}
+                                    required />
                                     <label className="form-check-label" htmlFor="invalidCheck3">
                                         Acepto los terminos y condiciones
                                     </label>
+                                    {marcado === false && presionado === true && (
                                     <div className="invalid-feedback">
                                         Debes aceptar los terminos y condiciones para continuar.
                                     </div>
+                                    )}
+
                                 </div>
                             </div>
                             
-                            <button className="btn btn-primary" type="submit">Enviar</button>
+                            <button className="btn btn-primary" type="submit"
+                            value = {presionado}
+                            onClick = {(e) => setPresionado(true)}
+
+                            
+                            >Enviar</button>
                         </form>
                     </div>
                 </div>
