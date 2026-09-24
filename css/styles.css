@@ -1,10 +1,10 @@
 /* Variables de Colores Personalizados */
 :root {
-    --color-primary: #1B5E20;    /* Verde oscuro principal */
-    --color-secondary: #66BB6A;  /* Verde medio */
-    --color-light: #A5D6A7;      /* Verde suave / bordes */
-    --color-bg: #E8F5E9;         /* Verde muy claro para el fondo */
-    --color-text: #1C2833;       /* Texto oscuro para buena legibilidad */
+    --color-primary: #1B5E20;    
+    --color-secondary: #66BB6A;  
+    --color-light: #A5D6A7;     
+    --color-bg: #E8F5E9;        
+    --color-text: #1C2833;       
     --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -56,8 +56,11 @@ nav a:hover, nav a.active {
 
 /* Banner Hero */
 .hero {
-    background: linear-gradient(rgba(27, 94, 32, 0.7), rgba(27, 94, 32, 0.7)), url('img/cordilleralosandes.jpg') center/cover no-repeat;
-    background-color: var(--color-primary); /* Respaldo si no carga la imagen */
+    background-image: linear-gradient(rgba(27, 94, 32, 0.7), rgba(27, 94, 32, 0.7)), url("../img/cordilleralosandes.jpg");
+    background-color: var(--color-primary); 
+    background-repeat: no-repeat;
+    background-position-y: 30%;
+    background-size: cover;
     color: white;
     text-align: center;
     padding: 4rem 1rem;
