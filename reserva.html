@@ -9,14 +9,10 @@
     <!-- Hoja de estilos personalizada con tus colores -->
     <link rel="stylesheet" href="css/styles.css">
 
-
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-
-
 </head>
 <body>
 
@@ -29,8 +25,8 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="panoramas.html">Panoramas</a></li>
-                <li><a href="alojamiento.html" >Alojamiento y Gastronomía</a></li>
-                <li><a href="reserva.html"class = "active">Reserva y Contacto</a></li>
+                <li><a href="alojamiento.html">Alojamiento y Gastronomía</a></li>
+                <li><a href="reserva.html" class="active">Reserva y Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -54,16 +50,22 @@
 
     </main>
 
-
-  <script type="text/babel">
+    <script type="text/babel">
         
         function Revisar_formulario() {
+            const [servicio, setServicio] = React.useState('');
             const [nombre, setNombre] = React.useState('');
             const [apellido, setApellido] = React.useState('');
-            const [correo,setCorreo] = React.useState('');
-            const [formulario,setFormulario] = React.useState(false)
+            const [correo, setCorreo] = React.useState('');
+            const [formulario, setFormulario] = React.useState(false);
 
-            //nombre
+            // Validación del servicio elegido
+            let claseServicio = "form-select";
+            if (servicio !== "") {
+                claseServicio = "form-select is-valid";
+            }
+
+            // Validación del nombre
             let claseNombre = "form-control"; 
             if (nombre.length === 0) {
                 claseNombre = "form-control";
@@ -73,91 +75,113 @@
                 claseNombre = "form-control is-valid";
             }
 
-            //apellido
+            // Validación del apellido
             let claseApellido = "form-control";
-            
             if (apellido.length === 0) {
                 claseApellido = "form-control";
-                
             } else if (apellido.length < 3){
                 claseApellido = "form-control is-invalid";
-            } else{
+            } else {
                 claseApellido = "form-control is-valid";
-
             }
-            //correo
-            const [sinEditarAun,setsinEditarAun] = React.useState(true)
+
+            // Validación del correo
+            const [sinEditarAun, setsinEditarAun] = React.useState(true);
             let claseCorreo = "form-control";
             if (correo.includes("@") && sinEditarAun === false) {
                 claseCorreo = "form-control is-valid";
-            }else if (sinEditarAun === false){
+            } else if (sinEditarAun === false){
                 claseCorreo = "form-control is-invalid";
-
-                
             }
 
+            // Checkbox y botón
+            const [marcado, setMarcado] = React.useState(false);
+            const [presionado, setPresionado] = React.useState(false);
 
-            //checkbox 
-            const [marcado,setMarcado] = React.useState(false);
-            let claseCheckBox =  "form-control";
-            if (marcado === true && presionado ===true) {
-                claseCheckBox = "form-control is-valid";
-            } else if(marcado ===false && presionado == true){
-                claseCheckBox = "form-control is-invalid";
-            }
-
-
-            //BOTON
-            const [presionado,setPresionado] = React.useState(false);
-            
             if (formulario === true){
-
-
-                return(
+                return (
                     <div className="card text-center p-5">
                         <div className="card-body">
-                    {/* Cambia la ruta por la de tu imagen real */}
-                    <img 
-                        src="img/foto_formulario.jpg" 
-                        alt="Reserva exitosa" 
-                        style={{ maxWidth: '500px', margin: '0 auto', marginBottom: '20px', borderRadius: '30px' }} 
-                    />
-                    <h3 className="text-success">¡Todo listo!</h3>
-                    <p className="lead">Nos pondremos en contacto con usted a la brevedad para confirmar su reserva.</p>
-                    
-                    {/* Botón opcional por si quieren enviar otra reserva */}
-                    <button className="btn btn-outline-primary mt-3"
-                            onClick = {(e) => window.location.href = 'index.html'}
-                    >
-                        Volver al Incio
-                    </button>
-                </div>
-            </div>
-
+                            <img 
+                                src="img/foto_formulario.jpg" 
+                                alt="Reserva exitosa" 
+                                style={{ maxWidth: '500px', width: '100%', margin: '0 auto', marginBottom: '20px', borderRadius: '30px' }} 
+                            />
+                            <h3 className="text-success">¡Todo listo!</h3>
+                            <p className="lead">
+                                Nos pondremos en contacto con usted a la brevedad para confirmar su reserva/solicitud para <strong>{servicio}</strong>.
+                            </p>
+                            
+                            <button className="btn btn-outline-primary mt-3"
+                                    onClick={() => window.location.href = 'index.html'}
+                            >
+                                Volver al Inicio
+                            </button>
+                        </div>
+                    </div>
                 );
             }
             
             return (
                 <div className="card">
                     <div className="card-body">
-                        <form
-                        onSubmit = {(e) => setFormulario(true)}>
+                        <form onSubmit={(e) => { e.preventDefault(); setFormulario(true); }}>
+                            
+                            {/* MENÚ DESPLEGABLE DE SERVICIOS / PANORAMAS / GASTRONOMÍA */}
                             <div className="row mb-3">
-                                
-                                {/* APARTADO NOMBRE */}
-                                <div className="col-md-4 mb-3">
+                                <div className="col-12 mb-3">
+                                    <label htmlFor="selectServicio" className="form-label fw-bold">
+                                        Selecciona el Panorama, Alojamiento o Servicio a Reservar
+                                    </label>
+                                    <select 
+                                        id="selectServicio"
+                                        className={claseServicio}
+                                        value={servicio}
+                                        onChange={(e) => setServicio(e.target.value)}
+                                        required
+                                    >
+                                        <option value="" disabled>-- Selecciona una opción --</option>
+                                        
+                                        <optgroup label=" Panoramas y Actividades">
+                                            <option value="Trekking en la Montaña">Trekking en la Montaña</option>
+                                            <option value="Observación astronómica">Observación astronómica</option>
+                                            <option value="Tour Guiado">Tour Guiado</option>
+                                            <option value="Termas">Termas</option>
+                                            <option value="Museo histórico">Museo histórico</option>
+                                            <option value="Cabalgata">Cabalgata</option>
+                                        </optgroup>
+
+                                        <optgroup label=" Alojamientos">
+                                            <option value="Cabañas Zacarias flores del Campo">Cabañas Zacarias flores del Campo</option>
+                                            <option value="Tinajas y Cabañas Cordillera">Tinajas y Cabañas Cordillera</option>
+                                            <option value="Hostal Eclipse">Hostal "Eclipse"</option>
+                                        </optgroup>
+
+                                        <optgroup label=" Gastronomía">
+                                            <option value="Restaurante El Paisano">Restaurante El Paisano</option>
+                                            <option value="Pizzería A las Puertas del Cerro">Pizzería "A las Puertas del Cerro"</option>
+                                            <option value="Viñeta y Restaurante Entre Montañas">Viñeta y Restaurante "Entre Montañas"</option>
+                                        </optgroup>
+                                    </select>
+                                    {servicio === "" && presionado && (
+                                        <div className="invalid-feedback d-block">Debe seleccionar una opción.</div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* APARTADO NOMBRE Y APELLIDOS */}
+                            <div className="row mb-3">
+                                <div className="col-md-6 mb-3">
                                     <label htmlFor="validationServer01">Nombre</label>
                                     <input 
                                         type="text" 
-                                        className={claseNombre} /* Aquí conectamos la validación */
+                                        className={claseNombre} 
                                         id="validationServer01" 
                                         placeholder="Escribe tu nombre" 
-                                        value={nombre} /* Conectamos el valor */
-                                        onChange={(e) => setNombre(e.target.value)} /* Conectamos el evento (con mayúscula) */
+                                        value={nombre} 
+                                        onChange={(e) => setNombre(e.target.value)} 
                                         required 
                                     />                    
-                                    
-                                    {/* Mensajes de feedback */}
                                     {nombre.length > 0 && nombre.length < 3 && (
                                         <div className="invalid-feedback">El nombre debe tener al menos 3 letras.</div>
                                     )}
@@ -166,20 +190,17 @@
                                     )}
                                 </div>
                                 
-                                <div className="col-md-4 mb-3">
+                                <div className="col-md-6 mb-3">
                                     <label htmlFor="validationServer02">Apellidos</label>
-                                    <input type="text" 
+                                    <input 
+                                        type="text" 
                                         className={claseApellido} 
                                         id="validationServer02" 
                                         placeholder="Apellido Paterno y Materno"  
-                                        value = {apellido}
-                                        onChange = {(e) => {
-                                            setApellido(e.target.value);
-                                        }
-
-                                        }
-                                        required />
-                                    {/* Mensajes de feedback */}
+                                        value={apellido}
+                                        onChange={(e) => setApellido(e.target.value)}
+                                        required 
+                                    />
                                     {apellido.length > 0 && apellido.length < 3 && (
                                         <div className="invalid-feedback">El apellido debe tener al menos 3 letras.</div>
                                     )}
@@ -188,105 +209,103 @@
                                     )}
                                 </div>
                             </div>
- 
-                            {/* correo */}
+
+                            {/* CORREO, CIUDAD, COMUNA, CÓDIGO POSTAL Y TELÉFONO */}
                             <div className="row mb-3">
                                 <div className="col-md-4 mb-3">
                                     <label htmlFor="validationServer05">Correo electrónico</label>
-                                    <input type="text" 
-                                    className={claseCorreo} 
-                                    id="validationServer05" 
-                                    placeholder="correo@direccion.com" 
-                                    value = {correo}
-                                    onChange = {(e) => {
-                                        setCorreo(e.target.value);
-                                        setsinEditarAun(false);
-
-
-
-
-                                    }}
-                                    required />
-                                {/* Mensajes de feedback */}
-                                    {correo.includes("@") == false &&correo !== "" &&(
+                                    <input 
+                                        type="email" 
+                                        className={claseCorreo} 
+                                        id="validationServer05" 
+                                        placeholder="correo@direccion.com" 
+                                        value={correo}
+                                        onChange={(e) => {
+                                            setCorreo(e.target.value);
+                                            setsinEditarAun(false);
+                                        }}
+                                        required 
+                                    />
+                                    {!correo.includes("@") && correo !== "" && (
                                         <div className="invalid-feedback">Ingrese una dirección de correo válida</div>
                                     )}
-                                    {correo.includes("@") == true && (
-                                        <div className="valid-feedback">Dirección válida!</div>
+                                    {correo.includes("@") && (
+                                        <div className="valid-feedback">¡Dirección válida!</div>
                                     )}
-                                    {correo === "" && (
-                                        <div></div>
-                                    )}                                    
                                 </div>
+
                                 <div className="col-md-4 mb-3">
                                     <label htmlFor="validationServer03">Ciudad</label>
                                     <input type="text" className="form-control" id="validationServer03" placeholder="Santiago" required />
-
                                 </div>
+
                                 <div className="col-md-4 mb-3">
                                     <label htmlFor="validationServer04">Comuna</label>
                                     <input type="text" className="form-control" id="validationServer04" placeholder="Ingrese su comuna" required />
-                                    <div className="invalid-feedback">
-                                        Please provide a valid state.
-                                    </div>
                                 </div>
-                                <div className="col-md-4 mb-3">
-                                    <label htmlFor="validationServer05">Código Postal</label>
-                                    <input type="text" className="form-control" id="validationServer05" placeholder="Código postal" required />
 
+                                <div className="col-md-6 mb-3">
+                                    <label htmlFor="validationServerPostal">Código Postal</label>
+                                    <input type="text" className="form-control" id="validationServerPostal" placeholder="Código postal" required />
                                 </div>
-                                <div className="col-md-4 mb-3">
-                                    <label htmlFor="validationServer05">Número de teléfono</label>
-                                    <input type="text" className="form-control" id="validationServer05" placeholder="+56 9XXXXXXXX" required />
 
+                                <div className="col-md-6 mb-3">
+                                    <label htmlFor="validationServerTel">Número de teléfono</label>
+                                    <input type="text" className="form-control" id="validationServerTel" placeholder="+56 9XXXXXXXX" required />
                                 </div>
                             </div>
 
+                            {/* CHECKBOX DE TÉRMINOS */}
                             <div className="form-group mb-3">
                                 <div className="form-check">
                                     <input 
-                                    className={marcado ? "form-check-input is-valid" : "form-check-input is-invalid"}                                    
-                                    type="checkbox" 
-                                    value="" 
-                                    id="invalidCheck3"
-                                    checked = {marcado}
-                                    onChange = {(e) => setMarcado(e.target.checked)}
-                                    required />
+                                        className={marcado ? "form-check-input is-valid" : "form-check-input is-invalid"}                    
+                                        type="checkbox" 
+                                        id="invalidCheck3"
+                                        checked={marcado}
+                                        onChange={(e) => setMarcado(e.target.checked)}
+                                        required 
+                                    />
                                     <label className="form-check-label" htmlFor="invalidCheck3">
-                                        Acepto los terminos y condiciones
+                                        Acepto los términos y condiciones
                                     </label>
-                                    {marcado === false && presionado === true && (
-                                    <div className="invalid-feedback">
-                                        Debes aceptar los terminos y condiciones para continuar.
-                                    </div>
+                                    {!marcado && presionado && (
+                                        <div className="invalid-feedback">
+                                            Debes aceptar los términos y condiciones para continuar.
+                                        </div>
                                     )}
-
                                 </div>
                             </div>
                             
-                            <button className="btn btn-primary" type="submit"
-                            value = {presionado}
-                            onClick = {(e) => setPresionado(true)}
-
-                            
-                            >Enviar</button>
+                            <button 
+                                className="btn btn-primary" 
+                                type="submit"
+                                onClick={() => setPresionado(true)}
+                            >
+                                Enviar
+                            </button>
                         </form>
                     </div>
                 </div>
             );
         }
 
-        // ESTO ERA LO QUE FALTABA PARA QUE APARECIERA SIIIIII :D
         const contenedor = document.getElementById('root');
         const root = ReactDOM.createRoot(contenedor);
         root.render(<Revisar_formulario />);
 
     </script>
 
-
     <!-- Footer -->
-    <footer>
-        <p> 2026 Destino Cordillera - Proyecto de Turismo Local</p>
+    <footer class="bg-green text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-2">© 2026 Destino Cordillera - Proyecto de Turismo Local</p>
+            <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+                <span><strong>WhatsApp:</strong> +56919884365</span>
+                <span><strong>Instagram:</strong> @destiny.cordilleraChile</span>
+                <span><strong>Facebook:</strong> @destiny.cordillerafbfans</span>
+            </div>
+        </div>
     </footer>
 
     <!-- Bootstrap 5 JavaScript Bundle -->
