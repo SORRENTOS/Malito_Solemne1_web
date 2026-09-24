@@ -1,4 +1,5 @@
 # SOLEMNE DESARROLLO WEB: DESTINO CORDILLERA
+
 ![portada](img/foto_formulario.jpg)
 
 ## Integrantes
@@ -32,3 +33,8 @@ Para la realización de este proyecto se usaron las siguientes tecnologías:
 - React
 - JavaScript
 
+## Responsabilidades asignadas
+
+José Cerda: Diseño, Página de Panoramas
+Benjamín Rodríguez: Diseño, Página de Reserva y contacto
+Fabián Román: Diseño, index y alojamiento
